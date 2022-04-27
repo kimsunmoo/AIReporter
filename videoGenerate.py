@@ -133,8 +133,8 @@ def dissolve(path, cnt):
 
 def video_cv2(article_name):
     video_file = os.path.join(IMAGE_PATH, "result.mp4") # 동영상 파일 경로
-    src2 = cv2.imread(os.path.join(IMAGE_PATH, 'logo.png')) #로고파일 읽기
-    src3 = cv2.imread(os.path.join(IMAGE_PATH, 'logo2.png'))
+    src2 = cv2.imread(os.path.join(LOGO_IMAGE_PATH, 'logo.png')) #로고파일 읽기
+    src3 = cv2.imread(os.path.join(LOGO_IMAGE_PATH, 'logo2.png'))
     cap = cv2.VideoCapture(video_file) # 동영상 캡쳐 객체 생성  ---①
     w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))

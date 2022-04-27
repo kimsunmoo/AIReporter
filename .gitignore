@@ -133,3 +133,4 @@ utagger/
 audio/
 key/
 image/
+.gitignore

@@ -201,11 +201,13 @@ def generate_tts():
     texts = f.read()
     f.close() 
 
+    f = open('audiometa', 'w')
     i=1
     for text in normalize_multiline_text(texts):
         wav = synthesizer.tts(text, None, None)
         sf.write(os.path.join(AUDIO_PATH, 'audio{}.wav'.format(i)), wav, 22050, 'PCM_24')
+        f.write(wav.frames/wav.samplerate, '\n')
         i+=1
-        
+    f.close() 
 if __name__ == "__main__":
     generate_tts()

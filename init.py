@@ -13,7 +13,7 @@ def init():
         os.mkdir(KEYWORD_PATH) 
     if os.path.exists(FONT_PATH) == False:
         os.mkdir(FONT_PATH) 
-    if os.path.exists(AUDIO_PATH):
+    if os.path.exists(AUDIO_PATH) == False:
         shutil.rmtree(AUDIO_PATH)
     os.mkdir(AUDIO_PATH)
     

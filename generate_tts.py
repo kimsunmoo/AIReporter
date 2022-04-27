@@ -206,7 +206,9 @@ def generate_tts():
     for text in normalize_multiline_text(texts):
         wav = synthesizer.tts(text, None, None)
         sf.write(os.path.join(AUDIO_PATH, 'audio{}.wav'.format(i)), wav, 22050, 'PCM_24')
-        f.write(wav.frames/wav.samplerate, '\n')
+        
+        with sf.SoundFile(os.path.join(AUDIO_PATH, 'audio{}.wav'.format(i))) as wavfile:
+            f.write(wavfile.frames/wavfile.samplerate, '\n')
         i+=1
     f.close() 
 if __name__ == "__main__":

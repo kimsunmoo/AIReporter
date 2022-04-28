@@ -22,7 +22,7 @@ def videoGen(cnt, length, article_name):
         os.system('ffmpeg -framerate 1/{} -i "output{}.jpg" -c:v libx264 -preset:v veryfast -crf 22 -r 24 -y -pix_fmt yuv420p "test{}.mp4"'.format(length/cnt,i,i))
 
     dissolve(IMAGE_PATH, cnt) #디졸브 효과
-    video_cv2(IMAGE_PATH, article_name) # 자막, 마크 등등..
+    video_cv2(article_name) # 자막, 마크 등등..
 
     os.chdir(IMAGE_PATH)
     os.system('ffmpeg -i result2.mp4 -i ../audio/sounds.wav -c:v copy -c:a aac -strict experimental output.mp4')

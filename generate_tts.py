@@ -209,6 +209,8 @@ def generate_tts():
         
         with sf.SoundFile(os.path.join(AUDIO_PATH, 'audio{}.wav'.format(i))) as wavfile:
             f.write('{}\n'.format(wavfile.frames/wavfile.samplerate))
+            f.write('{}\n'.format(text))
+            print('frames: {}, wavfile.samplerate: {}\n text: {}'.format(wavfile.frames, wavfile.samplerate, text))
         i+=1
     f.close() 
 if __name__ == "__main__":

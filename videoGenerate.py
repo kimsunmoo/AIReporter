@@ -29,11 +29,11 @@ def videoGen(cnt, length, article_name):
 
     print("영상 생성 완료.")
 
-def dissolve(path, cnt):
+def dissolve(image_path, cnt):
     for i in range(1,cnt):
-        v1=os.path.join(path, 'test1.mp4')
-        v2=os.path.join(path, 'test{}.mp4'.format(i+1))
-        path = os.path.join(path, 'result.mp4')
+        v1=os.path.join(image_path, 'test1.mp4')
+        v2=os.path.join(image_path, 'test{}.mp4'.format(i+1))
+        path = os.path.join(image_path, 'result.mp4')
         cap1 = cv2.VideoCapture(v1)
         cap2 = cv2.VideoCapture(v2)
 

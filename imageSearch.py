@@ -62,12 +62,15 @@ def get_image(args):
 
         savePath = "./image"
         ssl._create_default_https_context = ssl._create_unverified_context
-        for i in range(0, len(test.get("items"))):
-            print(test.get('items')[i].get("title"))
-            print(test.get('items')[i].get("link"))
-            FileName = os.path.join(savePath, "google" + str(i) + str(j) + '.jpg')
-            print('full name : {}'.format(FileName))
-            ur.urlretrieve(test.get("items")[i].get("link"),FileName)
+        try:
+            for i in range(0, len(test.get("items"))):
+                print(test.get('items')[i].get("title"))
+                print(test.get('items')[i].get("link"))
+                FileName = os.path.join(savePath, "google" + str(i) + str(j) + '.jpg')
+                print('full name : {}'.format(FileName))
+                ur.urlretrieve(test.get("items")[i].get("link"),FileName)
+        except:
+            continue
             
 def rm_dup():
     search = dif("./image/",similarity="normal",sort_output=False, delete=False)

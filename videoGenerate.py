@@ -145,12 +145,26 @@ def video_cv2(article_name):
     fps = cap.get(cv2.CAP_PROP_FPS)
 
     out = cv2.VideoWriter(os.path.join(IMAGE_PATH, 'result2.mp4'), fourcc, fps, (int(width), int(height)))
+    
+    caption_frames = []
+    captions = []
+    with open('audiometa', 'r') as f:
+        caption_frames.append(f.readline()*fps)
+        captions.append(f.readline())
+    print(caption_frames)
+    print(captions)
+    caption_index = 0
 
     if cap.isOpened():                 # 캡쳐 객체 초기화 확인
+        cur_frame = 0
         while True:
             ret, img = cap.read()      # 다음 프레임 읽기      --- ②
             if ret:                     # 프레임 읽기 정상
-            
+                cur_frame += 1
+                if cur_frame > caption_frames[caption_index]:
+                    caption_index += 1
+                    cur_frame = 1
+
                 rows, cols, channels = src2.shape #로고파일 픽셀값 저장
                 roi = img[70:rows+70,900:cols+900] #로고파일 필셀값을 관심영역(ROI)으로 저장함.
                 
@@ -178,7 +192,7 @@ def video_cv2(article_name):
                 
 #                 cv2.rectangle(np_array, (40, 550), (190, 661), (53, 136, 5), 3 )
                 cv2.rectangle(np_array, (190, 550), (1040, 660), (255, 255, 255), -1 )
-                output = PutText(FONT_PATH, np_array, article_name, font_size = 50, xy = (210, 585), bgr = (0, 0, 0))
+                output = PutText(FONT_PATH, np_array, captions[caption_index], font_size = 50, xy = (210, 585), bgr = (0, 0, 0))
                 out.write(output)
             else:                       # 다음 프레임 읽을 수 없슴,
                 break                   # 재생 완료

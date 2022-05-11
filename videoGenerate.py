@@ -149,7 +149,7 @@ def video_cv2(article_name):
     caption_frames = []
     captions = []
     with open(os.path.join(PROJECT_HOME, 'audiometa'), 'r') as f:
-        caption_frames.append(f.readline()*fps)
+        caption_frames.append(int(f.readline())*fps)
         captions.append(f.readline())
     print(caption_frames)
     print(captions)

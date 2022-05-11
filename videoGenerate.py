@@ -1,5 +1,6 @@
 import sys
 import os
+import math
 import cv2
 import numpy as np
 import natsort
@@ -149,7 +150,7 @@ def video_cv2(article_name):
     caption_frames = []
     captions = []
     with open(os.path.join(PROJECT_HOME, 'audiometa'), 'r') as f:
-        caption_frames.append(float(f.readline().strip())*fps)
+        caption_frames.append(math.ceil(float(f.readline().strip())*fps))
         captions.append(f.readline())
     print(caption_frames)
     print(captions)

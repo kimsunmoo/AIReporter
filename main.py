@@ -16,8 +16,8 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     
-    generate_tts() # 음성 생성
     init() 
+    generate_tts() # 음성 생성
     keyFile() # 키워드 추출 
     cnt = imageSearch(args) # 키워드로 사진 검색 및 저장
     length = audio() # 음성 합치기

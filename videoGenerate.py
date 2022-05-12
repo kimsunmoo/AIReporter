@@ -154,7 +154,7 @@ def video_cv2():
             line = f.readline()
             if not line:
                 break
-            caption_frames.append(math.ceil(float(f.readline().strip())*fps))
+            caption_frames.append(math.ceil(float(line.strip())*fps))
             captions.append(f.readline())
     print(caption_frames)
     print(captions)

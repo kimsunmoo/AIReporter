@@ -8,7 +8,7 @@ import wave
 from PIL import ImageFont, ImageDraw, Image
 from config import *
 
-def videoGen(cnt, length, article_name):
+def videoGen(cnt, length):
     #이미지 크기 1080:720 으로 만들기, 검정색으로 패딩 넣기
     os.chdir(IMAGE_PATH)
     os.system('ffmpeg -i "image-%d.jpg" -vf "scale=-1:-1, pad=1080:720:(1080-iw)/2:(720-ih)/2:color=black" "output%d.jpg"')
@@ -23,7 +23,7 @@ def videoGen(cnt, length, article_name):
         os.system('ffmpeg -framerate 1/{} -i "output{}.jpg" -c:v libx264 -preset:v veryfast -crf 22 -r 24 -y -pix_fmt yuv420p "test{}.mp4"'.format(length/cnt,i,i))
 
     dissolve(IMAGE_PATH, cnt) #디졸브 효과
-    video_cv2(article_name) # 자막, 마크 등등..
+    video_cv2() # 자막, 마크 등등..
 
     os.chdir(IMAGE_PATH)
     os.system('ffmpeg -i result2.mp4 -i ../audio/sounds.wav -c:v copy -c:a aac -strict experimental output.mp4')
@@ -132,7 +132,7 @@ def dissolve(image_path, cnt):
         os.rename(path,v1)
     os.rename(v1, 'result.mp4')
 
-def video_cv2(article_name):
+def video_cv2():
     video_file = os.path.join(IMAGE_PATH, "result.mp4") # 동영상 파일 경로
     src2 = cv2.imread(os.path.join(LOGO_IMAGE_PATH, 'logo.png')) #로고파일 읽기
     src3 = cv2.imread(os.path.join(LOGO_IMAGE_PATH, 'logo2.png'))
@@ -150,8 +150,12 @@ def video_cv2(article_name):
     caption_frames = []
     captions = []
     with open(os.path.join(PROJECT_HOME, 'audiometa'), 'r') as f:
-        caption_frames.append(math.ceil(float(f.readline().strip())*fps))
-        captions.append(f.readline())
+        while True:
+            line = f.readline()
+            if not line:
+                break
+            caption_frames.append(math.ceil(float(f.readline().strip())*fps))
+            captions.append(f.readline())
     print(caption_frames)
     print(captions)
     caption_index = 0

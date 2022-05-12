@@ -17,8 +17,3 @@ def init():
     if os.path.exists(AUDIO_PATH):
         shutil.rmtree(AUDIO_PATH)
     os.mkdir(AUDIO_PATH)
-
-    print("기사 제목 입력")
-    article_name=  input()
-    
-    return article_name
